@@ -1,0 +1,14 @@
+[package]
+name = "simplelang"
+version = "0.1.0"
+authors = ["Gray SuitCase <ubatamamoon@gmail.com>"]
+description = "Compiler and REPL for the very simple language"
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+nom = "7"
+cranelift = "0.101.4"
+cranelift-jit = "0.101.4"
+cranelift-module = "0.101.4"
+cranelift-native = "0.101.4"
