@@ -10,7 +10,7 @@ fn println_u32(n: u32) {
 }
 
 pub struct JITContext {
-    pub module: JITModule,
+    pub(crate) module: JITModule,
     pub(crate) ctx: Context,
     pub(crate) func_ctx: FunctionBuilderContext,
     pub(crate) data_description: DataDescription,
@@ -57,5 +57,14 @@ impl JITContext {
             print_func: func_println_u32,
             stmt_index: 0,
         }
+    }
+
+    pub(crate) fn get_finalized_function(&mut self, func_id: FuncId) -> extern "C" fn() {
+        // Perform linking.
+        self.module.finalize_definitions().unwrap();
+
+        let raw_func_ptr = self.module.get_finalized_function(func_id);
+        // Cast it to a rust function pointer type.
+        unsafe { std::mem::transmute::<_, extern "C" fn()>(raw_func_ptr) }
     }
 }

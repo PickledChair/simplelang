@@ -1,8 +1,5 @@
 use simplelang::{codegen::Codegen, env::Env, jit_ctx::JITContext, parser};
-use std::{
-    io::{self, Write},
-    mem,
-};
+use std::io::{self, Write};
 
 fn main() {
     let mut jit_ctx = JITContext::new();
@@ -37,15 +34,7 @@ fn main() {
                 }
 
                 let mut codegen = Codegen::new(&mut jit_ctx);
-                let func_id = codegen.codegen_stmt(&stmt);
-
-                // Perform linking.
-                jit_ctx.module.finalize_definitions().unwrap();
-
-                let raw_func_ptr = jit_ctx.module.get_finalized_function(func_id);
-
-                // Cast it to a rust function pointer type.
-                let func_ptr = unsafe { mem::transmute::<_, extern "C" fn()>(raw_func_ptr) };
+                let func_ptr = codegen.codegen_stmt(&stmt);
                 // Call it!
                 func_ptr();
             }
