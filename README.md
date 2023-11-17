@@ -1,6 +1,6 @@
 # simplelang
 
-[cordx56](https://github.com/cordx56) 氏の「[Rustで作る！自作言語コンパイラ入門](https://techbookfest.org/product/z9zCtNAJrigmuu3Jz9VDi?productVariantID=iMxgceXmQkk0T9d3cPskCP&utm_campaign=share&utm_medium=social&utm_source=twitter)」をもとに実装したシンプルな言語のコンパイラです。書籍では JIT コンパイルは LLVM で行っていますが、この実装では代わりに [Cranelift](https://cranelift.dev) を使用しました。
+[cordx56](https://github.com/cordx56) 氏の「[Rustで作る！自作言語・コンパイラ入門](https://techbookfest.org/product/z9zCtNAJrigmuu3Jz9VDi?productVariantID=iMxgceXmQkk0T9d3cPskCP&utm_campaign=share&utm_medium=social&utm_source=twitter)」をもとに実装したシンプルな言語のコンパイラです。書籍では JIT コンパイルは LLVM で行っていますが、この実装では代わりに [Cranelift](https://cranelift.dev) を使用しました。
 
 ## 使い方
 
