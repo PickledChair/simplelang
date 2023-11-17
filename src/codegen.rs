@@ -14,7 +14,12 @@ impl<'a> Codegen<'a> {
         Self { jit }
     }
 
-    pub fn codegen_stmt(&mut self, stmt: &Statement) -> extern "C" fn() {
+    pub fn codegen(&mut self, stmt: &Statement) -> extern "C" fn() {
+        let func_id = self.codegen_stmt(stmt);
+        self.jit.get_finalized_function(func_id)
+    }
+
+    pub fn codegen_stmt(&mut self, stmt: &Statement) -> FuncId {
         let func_name = format!("stmt{}", self.jit.stmt_index);
         let func_sig = self.jit.module.make_signature();
         let func_id = self
@@ -53,7 +58,7 @@ impl<'a> Codegen<'a> {
         self.jit.module.clear_context(&mut self.jit.ctx);
 
         self.jit.stmt_index += 1;
-        self.jit.get_finalized_function(func_id)
+        func_id
     }
 }
 

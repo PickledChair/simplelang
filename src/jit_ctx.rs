@@ -59,7 +59,7 @@ impl JITContext {
         }
     }
 
-    pub(crate) fn get_finalized_function(&mut self, func_id: FuncId) -> extern "C" fn() {
+    pub fn get_finalized_function(&mut self, func_id: FuncId) -> extern "C" fn() {
         // Perform linking.
         self.module.finalize_definitions().unwrap();
 

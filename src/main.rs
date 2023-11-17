@@ -34,7 +34,7 @@ fn main() {
                 }
 
                 let mut codegen = Codegen::new(&mut jit_ctx);
-                let func_ptr = codegen.codegen_stmt(&stmt);
+                let func_ptr = codegen.codegen(&stmt);
                 // Call it!
                 func_ptr();
             }
